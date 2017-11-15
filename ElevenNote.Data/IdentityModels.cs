@@ -33,6 +33,8 @@ namespace ElevenNote.Data
             return new ElevenNoteDBContext();
         }
 
+        public DbSet<NoteEntity> Notes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
