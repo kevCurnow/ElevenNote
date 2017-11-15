@@ -1,5 +1,6 @@
 ﻿using ElevenNote.Models;
 using ElevenNote.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,34 @@ namespace ElevenNote.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var svc = new NoteService();
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var svc = new NoteService(userId);
             var model = svc.GetNotes();
             return View(model);
+        }
+
+        public ActionResult Create()
+        {
+            var model = new NoteCreateModel();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(NoteCreateModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var svc = new NoteService(userId);
+
+            if(!svc.CreateNote(model))
+            {
+                ModelState.AddModelError("", "Unable to create note");
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
