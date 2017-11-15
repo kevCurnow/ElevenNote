@@ -43,7 +43,7 @@ namespace ElevenNote.Web
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ElevenNoteUser>(context.Get<ElevenNoteDBContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ElevenNoteUser>(context.Get<ElevenNoteDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ElevenNoteUser>(manager)
             {

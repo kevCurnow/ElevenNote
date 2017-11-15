@@ -20,17 +20,17 @@ namespace ElevenNote.Data
         }
     }
 
-    public class ElevenNoteDBContext : IdentityDbContext<ElevenNoteUser>
+    public class ElevenNoteDbContext : IdentityDbContext<ElevenNoteUser>
     {
-        public ElevenNoteDBContext()
+        public ElevenNoteDbContext()
             //DefaultConnection is how we connect to 
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public static ElevenNoteDBContext Create()
+        public static ElevenNoteDbContext Create()
         {
-            return new ElevenNoteDBContext();
+            return new ElevenNoteDbContext();
         }
 
         public DbSet<NoteEntity> Notes { get; set; }
