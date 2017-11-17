@@ -2,6 +2,8 @@
 
 <span>
     <i 
-       class="glyphicon glyphicon-star-empty"></i>
+       class="glyphicon @(Model ? "glyphicon-star" : "glyphicon-star-empty")"
+       data-toggle="star"
+       data-id="@ViewBag.ID"></i>
 </span>
 
